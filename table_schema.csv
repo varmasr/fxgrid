@@ -1,0 +1,55 @@
+"table_name","column_name","data_type","numeric_precision","numeric_scale"
+live_market_data_m1,instrument,character varying,,
+live_market_data_m1,timestamp,timestamp with time zone,,
+live_market_data_m1,bid_open,numeric,18,8
+live_market_data_m1,bid_high,numeric,18,8
+live_market_data_m1,bid_low,numeric,18,8
+live_market_data_m1,bid_close,numeric,18,8
+live_market_data_m1,ask_open,numeric,18,8
+live_market_data_m1,ask_high,numeric,18,8
+live_market_data_m1,ask_low,numeric,18,8
+live_market_data_m1,ask_close,numeric,18,8
+live_market_data_m1,volume,integer,32,0
+live_market_data_m1,tick_count,integer,32,0
+live_market_data_m1,source,character varying,,
+live_market_data_m1,account_id,character varying,,
+live_market_data_m1,data_quality_score,smallint,16,0
+live_market_data_m1,processing_latency_ms,integer,32,0
+live_market_data_m1,received_at,timestamp with time zone,,
+live_market_data_m1,created_by,character varying,,
+live_market_data_m1,spread_close,numeric,18,8
+macro_calendar_events,datetime_utc,timestamp with time zone,,
+macro_calendar_events,ff_id,bigint,64,0
+macro_calendar_events,event_name,text,,
+macro_calendar_events,currency,text,,
+macro_calendar_events,impact,text,,
+macro_calendar_events,actual,text,,
+macro_calendar_events,forecast,text,,
+macro_calendar_events,previous,text,,
+macro_calendar_events,country,text,,
+macro_calendar_events,ff_date_label,text,,
+macro_calendar_events,ff_detail_url,text,,
+macro_calendar_events,time_local,text,,
+macro_calendar_events,date_local,date,,
+macro_calendar_events,source_file,text,,
+macro_calendar_events,load_ts,timestamp with time zone,,
+market_data_m1,instrument,character varying,,
+market_data_m1,timestamp,timestamp with time zone,,
+market_data_m1,bid_open,numeric,18,8
+market_data_m1,bid_high,numeric,18,8
+market_data_m1,bid_low,numeric,18,8
+market_data_m1,bid_close,numeric,18,8
+market_data_m1,ask_open,numeric,18,8
+market_data_m1,ask_high,numeric,18,8
+market_data_m1,ask_low,numeric,18,8
+market_data_m1,ask_close,numeric,18,8
+market_data_m1,volume,numeric,15,2
+market_data_m1,source,character varying,,
+market_data_m1,account_id,character varying,,
+market_data_m1,data_source_type,character varying,,
+market_data_m1,processing_latency_ms,integer,32,0
+market_data_m1,data_quality_score,smallint,16,0
+market_data_m1,is_validated,boolean,,
+market_data_m1,created_by,character varying,,
+market_data_m1,created_at,timestamp with time zone,,
+market_data_m1,spread_close,numeric,18,8

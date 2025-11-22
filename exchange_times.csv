@@ -1,0 +1,5 @@
+Period,Exchange,Local Open,Local Close,UTC Open,UTC Close,IST Open (UTC+5:30),IST Close (UTC+5:30)
+Standard Time (UK: Nov – Mar US: Nov – Mar),London (LSE),08:00 GMT,16:30 GMT,08:00,16:30,13:30,22:00
+,New York (NYSE/NASDAQ),09:30 EST,16:00 EST,14:30,21:00,20:00,02:30 (next day)
+Daylight Saving Time (UK BST: late Mar – late Oct US EDT: mid-Mar – early Nov),London (LSE),08:00 BST,16:30 BST,07:00,15:30,12:30,21:00
+,New York (NYSE/NASDAQ),09:30 EDT,16:00 EDT,13:30,20:00,19:00,01:30 (next day)

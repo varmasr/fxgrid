@@ -1,0 +1,25 @@
+# -------------------------
+# Core Python Libraries
+# -------------------------
+python-dotenv==1.0.1
+PyYAML==6.0.2
+
+# -------------------------
+# MetaTrader 5 Integration
+# -------------------------
+MetaTrader5
+
+# -------------------------
+# PostgreSQL / TimescaleDB
+# -------------------------
+psycopg2-binary
+
+# -------------------------
+# Logging & Utilities
+# -------------------------
+loguru
+
+# -------------------------
+# Optional but recommended
+# -------------------------
+pytz   # For timezone conversions if needed

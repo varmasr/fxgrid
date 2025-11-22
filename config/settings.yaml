@@ -1,0 +1,157 @@
+# config/settings.yaml
+
+system:
+  name: "fx_streaming_pipeline"
+  environment: "dev"                # dev | staging | prod
+  created_by: "mt5_streamer"
+  source_tag: "mt5_streamer_v1"     # appears in DB rows under 'source'
+
+database:
+  schema: "public"
+  live_table: "live_market_data_m1"
+  historical_table: "market_data_m1"
+  storage_timezone: "UTC"
+
+  user_env: "DB_USER"               # read from .env
+  password_env: "DB_PASSWORD"
+  host_env: "DB_HOST"
+  port_env: "DB_PORT"
+  name_env: "DB_NAME"
+
+  default_data_quality_score: 100
+  statement_timeout_ms: 30000
+
+logging:
+  level: "INFO"
+  file: "logs/mt5_streamer.log"
+  rotation: "10 MB"
+  backups: 5
+
+# ---------------------------------------------------------------------
+# ONLY ONE BROKER IS USED FOR LIVE DATA: ICT MARKETS
+# ---------------------------------------------------------------------
+brokers:
+  ict_markets:
+    label: "ICT Markets MT5"
+    type: "mt5"
+
+    # Broker server time = UTC+2 (fixed offset)
+    timezone:
+      mode: "fixed_offset"
+      utc_offset_hours: 2
+
+    connection_env:
+      login: "ICT_STREAM_LOGIN"
+      password: "ICT_STREAM_PASSWORD"
+      server: "ICT_STREAM_SERVER"
+
+    accounts:
+      streaming:
+        description: "ICT Demo Account used ONLY for live streaming data"
+        account_id: "icmarkets-demo"
+        role: "streaming"          # streaming-only
+        enabled: false
+
+  fundednext_1:
+    label: "FundedNext Server 2"
+    type: "mt5"
+
+    # Broker server time = UTC+2 (fixed offset)
+    timezone:
+      mode: "fixed_offset"
+      utc_offset_hours: 2
+
+    connection_env:
+      login: "FN_LOGIN"
+      password: "FN_PASSWORD"
+      server: "FN_SERVER"
+
+    accounts:
+      streaming:
+        description: "FundedNext Challenge Account used for live streaming data"
+        account_id: "fundednext-13836502"
+        role: "streaming"          # streaming-only
+        enabled: true
+
+    
+
+  # ------------------------------------------------------------------
+  # FUTURE EXECUTION ACCOUNTS (NOT USED FOR STREAMING NOW)
+  # ------------------------------------------------------------------
+
+  fundednext_2:
+    label: "FundedNext MT5"
+    type: "mt5"
+    timezone:
+      mode: "fixed_offset"
+      utc_offset_hours: 3
+    connection_env:
+      login: "FN_LOGIN"
+      password: "FN_PASSWORD"
+      server: "FN_SERVER"
+    accounts:
+      funded:
+        description: "FundedNext funded account"
+        account_id: "fn_funded"
+        role: "execution"
+        enabled: false
+      challenge:
+        description: "FundedNext challenge account"
+        account_id: "fn_challenge"
+        role: "execution"
+        enabled: false
+
+  icmarkets:
+    label: "IC Markets MT5"
+    type: "mt5"
+    timezone:
+      mode: "fixed_offset"
+      utc_offset_hours: 2
+    connection_env:
+      login: "ICM_LOGIN"
+      password: "ICM_PASSWORD"
+      server: "ICM_SERVER"
+    accounts:
+      exec_demo:
+        description: "IC Markets demo for execution testing"
+        account_id: "icm_demo"
+        role: "execution"
+        enabled: false
+
+# ---------------------------------------------------------------------
+# STREAMING JOBS: we keep only ONE active job for ICT Markets now
+# ---------------------------------------------------------------------
+streaming:
+  defaults:
+    timeframe: "M1"
+    poll_interval_seconds: 60
+    lookback_minutes_on_each_poll: 5
+    max_backfill_hours_on_startup: 48
+    flush_batch_size: 100
+    created_by: "mt5_streamer"
+
+  jobs:
+    fundednext_streaming_job:
+      enabled: true
+      broker_key: "fundednext_1"
+      account_key: "streaming"
+
+      instruments:
+        - "USDJPY"
+        - "EURUSD"
+        - "GBPUSD"
+        - "GBPJPY"
+        - "XAUUSD"
+        - "BTCUSD"
+
+      # Optionally override defaults
+      timeframe: "M1"
+      poll_interval_seconds: 30
+      lookback_minutes_on_each_poll: 5
+      max_backfill_hours_on_startup: 48
+
+notifications:
+  telegram:
+    enabled: false
+    bot_token_env: "TELEGRAM_BOT_TOKEN"
+    chat_id_env: "TELEGRAM_CHAT_ID"
